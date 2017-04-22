@@ -10,6 +10,7 @@ I'm using Minmaxing CSS styles from https://html5up.net/
 
 Pre-requisites: Maven, Tomcat 7, MySql Server. All of them installed and running.
 
+* MySql
 Create an schema on Mysql named "test" and execute the init.sql.
 
 Download the .zip file from this repository. 
