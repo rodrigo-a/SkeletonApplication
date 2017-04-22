@@ -18,7 +18,7 @@ Download the .zip file from this repository.
 Extract the project folder.
 Compile with Maven (mvn compile)
 Package the compiled project (mvn package)
-Copy the generated .war file (SkeletonApp.war) into the deplyment folder of your Tomcat 7 server.
+Copy the generated .war file (SkeletonApp.war) into the deployment folder of your Tomcat 7 server.
 
 To access the application:
 http://localhost:8080/SkeletonApp/faces/xhtml/index.xhtml
