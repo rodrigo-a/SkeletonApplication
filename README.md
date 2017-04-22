@@ -11,6 +11,7 @@ I'm using Minmaxing CSS styles from https://html5up.net/
 Pre-requisites: Maven, Tomcat 7, MySql Server. All of them installed and running.
 
 * MySql
+
 Create an schema on Mysql named "test" and execute the init.sql.
 
 Download the .zip file from this repository. 
@@ -27,15 +28,21 @@ To access the rest endpoint:
 * Replace {} markers by the corresponding data
 
 - List all Users:
+
 http://localhost:8080/SkeletonApp/rest/User/list 
 
+
 - Read User
+
 http://localhost:8080/SkeletonApp/rest/User/read/{ID} 
 
+
 - Create User
+
 http://localhost:8080/SkeletonApp/rest/User/create/{NAME}/{DESCRIPTION}
 
 - Delete User
+
 http://localhost:8080/SkeletonApp/rest/User/delete/{ID}
 
 - Update User
