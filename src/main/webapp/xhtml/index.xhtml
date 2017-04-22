@@ -1,0 +1,398 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="template/template.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="painel">
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<h:form>
+					<p:commandButton value="Yes" styleClass="ui-confirmdialog-yes"
+						icon="ui-icon-check" type="button" />
+					<p:commandButton value="No" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-close" type="button" />
+				</h:form>
+			</p:confirmDialog>
+
+
+			<!-- Department Context -->
+			<div class="main" style="padding: 0 !important;">
+				<table style="width: 100%;">
+					<tr>
+						<td>
+							<!-- Department Context -->
+							<div>
+								<center>
+									<p:commandButton value="New Department"
+										actionListener="#{indexBean.showDepartmentDialog(null, false)}"
+										update="departmentDialogForm" style="margin: 30px;"></p:commandButton>
+									<h2>Departments</h2>
+								</center>
+								<h:form id="formDepartmentTable">
+									<div style="padding: 0px 30px 30px 30px;">
+										<center>
+											<p:dataTable id="tableDepartment" widgetVar="tableDepartment"
+												var="dep" value="#{indexBean.departmentList}"
+												paginator="true" rows="10"
+												paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+												currentPageReportTemplate="({currentPage} of {totalPages})"
+												emptyMessage="No records found." style="width: 500px;">
+												<p:column width="25">
+													<f:facet name="header">
+														<h:outputText value="Id" />
+													</f:facet>
+													<h:outputText value="#{dep.id}" />
+												</p:column>
+
+												<p:column width="50">
+													<f:facet name="header">
+														<h:outputText value="Name" />
+													</f:facet>
+													<h:outputText value="#{dep.name}" />
+												</p:column>
+
+												<p:column style="text-align: center" width="30">
+													<p:commandButton icon="ui-icon-search" title="View"
+														actionListener="#{indexBean.showDepartmentDialog(dep, true)}"
+														update="departmentDialogForm">
+													</p:commandButton>
+
+													<p:commandButton icon="ui-icon-pencil" title="Edit"
+														actionListener="#{indexBean.showDepartmentDialog(dep, false)}"
+														update="departmentDialogForm">
+													</p:commandButton>
+
+													<p:commandButton icon="ui-icon-close" title="Delete"
+														style="background-color: red !important; border-color: red !important"
+														actionListener="#{indexBean.deleteDepartment(dep)}"
+														update="formDepartmentTable, :formGrowl:growl">
+														<p:confirm header="Confirmation"
+															message="You are about to delete the #{dep.name} department. Are you sure?"
+															icon="ui-icon-alert" />
+													</p:commandButton>
+												</p:column>
+
+											</p:dataTable>
+										</center>
+									</div>
+								</h:form>
+
+								<h:form id="departmentDialogForm">
+									<p:dialog header="Department" widgetVar="departmentDialog"
+										minHeight="40" modal="true">
+										<p:ajax event="close" update=":formDepartmentTable"></p:ajax>
+										<h:panelGrid columns="2"
+											columnClasses="col-label, col-input-unico" id="panelForm"
+											style="width: 99%; margin-bottom: 20px;"
+											styleClass="ui-panelgrid">
+
+											<p:outputLabel for="idDepartment" value="Id:" />
+											<p:inputText id="idDepartment"
+												value="#{indexBean.currentDepartment.id}" readonly="true"
+												rendered="#{indexBean.currentDepartment.id != 0}" />
+											<p:inputText id="idDepartment2" value="-" readonly="true"
+												rendered="#{indexBean.currentDepartment.id == 0}" />
+
+
+											<p:outputLabel for="nameDepartment" value="Name:" />
+											<p:inputText id="nameDepartment"
+												value="#{indexBean.currentDepartment.name}"
+												readonly="#{indexBean.readOnlyDepartment}" />
+
+											<p:outputLabel for="descriptionDepartment"
+												value="Description:" />
+											<p:inputTextarea id="descriptionDepartment"
+												value="#{indexBean.currentDepartment.description}" rows="5"
+												cols="30" maxlength="145"
+												counterTemplate="{0} characters remaining."
+												autoResize="false"
+												readonly="#{indexBean.readOnlyDepartment}" />
+
+										</h:panelGrid>
+										<p:commandButton value="Save"
+											actionListener="#{indexBean.saveDepartment}"
+											rendered="#{not indexBean.readOnlyDepartment}"
+											update=":formGrowl:growl"></p:commandButton>
+									</p:dialog>
+								</h:form>
+							</div> <!-- end Department Context -->
+						</td>
+
+						<td>
+							<!-- User Context -->
+							<div>
+								<center>
+									<p:commandButton value="New User"
+										actionListener="#{indexBean.showUserDialog(null, false)}"
+										update="userDialogForm" style="margin: 30px;"></p:commandButton>
+									<h2>Users</h2>
+								</center>
+								<h:form id="formUserTable">
+									<div style="padding: 0px 30px 30px 30px;">
+										<center>
+											<p:dataTable id="tableUser" widgetVar="tableUser" var="usr"
+												value="#{indexBean.userList}" paginator="true" rows="10"
+												paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+												currentPageReportTemplate="({currentPage} of {totalPages})"
+												emptyMessage="No records found." style="width: 500px;">
+												<p:column width="25">
+													<f:facet name="header">
+														<h:outputText value="Id" />
+													</f:facet>
+													<h:outputText value="#{usr.id}" />
+												</p:column>
+
+												<p:column width="50">
+													<f:facet name="header">
+														<h:outputText value="Name" />
+													</f:facet>
+													<h:outputText value="#{usr.name}" />
+												</p:column>
+
+												<p:column style="text-align: center" width="30">
+													<p:commandButton icon="ui-icon-search" title="View"
+														actionListener="#{indexBean.showUserDialog(usr, true)}"
+														update="userDialogForm">
+													</p:commandButton>
+
+													<p:commandButton icon="ui-icon-pencil" title="Edit"
+														actionListener="#{indexBean.showUserDialog(usr, false)}"
+														update="userDialogForm">
+													</p:commandButton>
+
+													<p:commandButton icon="ui-icon-close" title="Delete"
+														style="background-color: red !important; border-color: red !important"
+														actionListener="#{indexBean.deleteUser(usr)}"
+														update="formUserTable, :formGrowl:growl">
+														<p:confirm header="Confirmation"
+															message="You are about to delete the #{usr.name} user. Are you sure?"
+															icon="ui-icon-alert" />
+													</p:commandButton>
+												</p:column>
+
+											</p:dataTable>
+										</center>
+									</div>
+								</h:form>
+
+								<h:form id="userDialogForm">
+									<p:dialog header="User" widgetVar="userDialog" minHeight="40"
+										modal="true">
+										<p:ajax event="close" update=":formUserTable"></p:ajax>
+										<h:panelGrid columns="2"
+											columnClasses="col-label, col-input-unico" id="panelForm"
+											style="width: 99%; margin-bottom: 20px;"
+											styleClass="ui-panelgrid">
+
+											<p:outputLabel for="idUser" value="Id:" />
+											<p:inputText id="idUser" value="#{indexBean.currentUser.id}"
+												readonly="true" />
+
+
+											<p:outputLabel for="nameUser" value="Name:" />
+											<p:inputText id="nameUser"
+												value="#{indexBean.currentUser.name}"
+												readonly="#{indexBean.readOnlyUser}" />
+
+											<p:outputLabel for="descriptionUser" value="Description:" />
+											<p:inputTextarea id="descriptionUser"
+												value="#{indexBean.currentUser.description}" rows="5"
+												cols="30" maxlength="145"
+												counterTemplate="{0} characters remaining."
+												autoResize="false" readonly="#{indexBean.readOnlyUser}" />
+
+											<p:separator style="width: 0px;" />
+											<p:separator style="width: 0px;" />
+
+											<p:outputLabel for="userDepartment" value="Department:" />
+											<p:selectOneMenu id="userDepartment"
+												converter="departmentConverter"
+												value="#{indexBean.userDepartment}" style="width:125px"
+												rendered="#{not indexBean.readOnlyUser}">
+												<f:selectItem itemLabel="Select One" itemValue="#{null}" />
+												<f:selectItems value="#{indexBean.departmentList}" var="dpt"
+													itemValue="#{dpt}" itemLabel="#{dpt.name}" />
+											</p:selectOneMenu>
+											<p:inputText id="userDepartment2"
+												value="#{indexBean.userDepartment.name}" readonly="true"
+												rendered="#{indexBean.readOnlyUser}" />
+
+											<p:separator style="width: 0px;" />
+											<p:separator style="width: 100px;"
+												rendered="#{not empty indexBean.currentUser.id}" />
+
+											<p:outputLabel value="Assign new permissions"
+												rendered="#{not empty indexBean.currentUser.id and not indexBean.readOnlyUser}" />
+											<h:panelGrid columns="2"
+												rendered="#{not empty indexBean.currentUser.id and not indexBean.readOnlyUser}">
+												<p:selectOneMenu id="oneMenuAllPermissions"
+													converter="permissionConverter"
+													value="#{indexBean.userPermission}" style="width:125px">
+													<f:selectItem itemLabel="Select One" itemValue="#{null}" />
+													<f:selectItems value="#{indexBean.permissionList}"
+														var="perm" itemValue="#{perm}" itemLabel="#{perm.name}" />
+												</p:selectOneMenu>
+												<p:commandButton value="Assign"
+													style="top: -5px; left: 5px;"
+													actionListener="#{indexBean.assignPermission(indexBean.userPermission)}"
+													update="userPermissions, :formGrowl:growl"></p:commandButton>
+											</h:panelGrid>
+
+											<p:outputLabel value="User's Permissions"
+												rendered="#{not empty indexBean.currentUser.id}" />
+											<p:dataTable id="userPermissions"
+												value="#{indexBean.currentUser.permissions}" var="perm"
+												paginator="true" rows="10"
+												paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+												currentPageReportTemplate="({currentPage} of {totalPages})"
+												emptyMessage="No records found." style="width: 250px;"
+												rendered="#{not empty indexBean.currentUser.id}">
+
+												<p:column width="25">
+													<f:facet name="header">
+														<h:outputText value="Id" />
+													</f:facet>
+													<h:outputText value="#{perm.id}" />
+												</p:column>
+
+												<p:column width="50">
+													<f:facet name="header">
+														<h:outputText value="Name" />
+													</f:facet>
+													<h:outputText value="#{perm.name}" />
+												</p:column>
+
+												<p:column style="text-align: center" width="30">
+													<p:commandButton icon="ui-icon-close" title="Delete"
+														style="background-color: red !important; border-color: red !important"
+														update=":formUserTable:tableUser, userPermissions, :formGrowl:growl" disabled="#{indexBean.readOnlyUser}" actionListener="#{indexBean.removeUserPermission(perm)}"> 
+													</p:commandButton> 
+												</p:column>
+
+											</p:dataTable>
+										</h:panelGrid>
+										<h:panelGrid columns="1" id="panelForm2">
+											<h:outputText
+												value="* Adding or removing permissions automaticaly saves the user."
+												rendered="#{not empty indexBean.currentUser.id and not indexBean.readOnlyUser}" />
+
+											<p:separator style="width: 0px;" />
+
+											<p:commandButton value="Save"
+												actionListener="#{indexBean.saveUser}"
+												rendered="#{not indexBean.readOnlyUser}"
+												update="panelForm, panelForm2, :formGrowl:growl"></p:commandButton>
+										</h:panelGrid>
+									</p:dialog>
+								</h:form>
+							</div> <!-- end User Context -->
+						</td>
+
+
+						<td>
+							<!-- Permission Context -->
+							<div>
+								<center>
+									<p:commandButton value="New Permission"
+										actionListener="#{indexBean.showPermissionDialog(null, false)}"
+										update="permissionDialogForm" style="margin: 30px;"></p:commandButton>
+									<h2>Permissions</h2>
+								</center>
+								<h:form id="formPermissionTable">
+									<div style="padding: 0px 30px 30px 30px;">
+										<center>
+											<p:dataTable id="tablePermission" widgetVar="tablePermission"
+												var="perm" value="#{indexBean.permissionList}"
+												paginator="true" rows="10"
+												paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+												currentPageReportTemplate="({currentPage} of {totalPages})"
+												emptyMessage="No records found." style="width: 500px;">
+												<p:column width="25">
+													<f:facet name="header">
+														<h:outputText value="Id" />
+													</f:facet>
+													<h:outputText value="#{perm.id}" />
+												</p:column>
+
+												<p:column width="50">
+													<f:facet name="header">
+														<h:outputText value="Name" />
+													</f:facet>
+													<h:outputText value="#{perm.name}" />
+												</p:column>
+
+												<p:column style="text-align: center" width="30">
+													<p:commandButton icon="ui-icon-search" title="View"
+														actionListener="#{indexBean.showPermissionDialog(perm, true)}"
+														update="permissionDialogForm">
+													</p:commandButton>
+
+													<p:commandButton icon="ui-icon-pencil" title="Edit"
+														actionListener="#{indexBean.showPermissionDialog(perm, false)}"
+														update="permissionDialogForm">
+													</p:commandButton>
+
+													<p:commandButton icon="ui-icon-close" title="Delete"
+														style="background-color: red !important; border-color: red !important"
+														actionListener="#{indexBean.deletePermission(perm)}"
+														update="formPermissionTable, :formGrowl:growl">
+														<p:confirm header="Confirmation"
+															message="You are about to delete the #{perm.name} permission. Are you sure?"
+															icon="ui-icon-alert" />
+													</p:commandButton>
+												</p:column>
+
+											</p:dataTable>
+										</center>
+									</div>
+								</h:form>
+								<h:form id="permissionDialogForm">
+									<p:dialog header="Permission" widgetVar="permissionDialog"
+										minHeight="40" modal="true">
+										<p:ajax event="close" update=":formPermissionTable"></p:ajax>
+										<h:panelGrid columns="2"
+											columnClasses="col-label, col-input-unico" id="panelForm"
+											style="width: 99%; margin-bottom: 20px;"
+											styleClass="ui-panelgrid">
+
+											<p:outputLabel for="idPermission" value="Id:" />
+											<p:inputText id="idPermission"
+												value="#{indexBean.currentPermission.id}" readonly="true"
+												rendered="#{indexBean.currentPermission.id != 0}" />
+											<p:inputText id="idPermission2" value="-" readonly="true"
+												rendered="#{indexBean.currentPermission.id == 0}" />
+
+
+											<p:outputLabel for="namePermission" value="Name:" />
+											<p:inputText id="namePermission"
+												value="#{indexBean.currentPermission.name}"
+												readonly="#{indexBean.readOnlyPermission}" />
+
+											<p:outputLabel for="descriptionPermission"
+												value="Description:" />
+											<p:inputTextarea id="descriptionPermission"
+												value="#{indexBean.currentPermission.description}" rows="5"
+												cols="30" maxlength="145"
+												counterTemplate="{0} characters remaining."
+												autoResize="false"
+												readonly="#{indexBean.readOnlyPermission}" />
+
+										</h:panelGrid>
+										<p:commandButton value="Save"
+											actionListener="#{indexBean.savePermission}"
+											rendered="#{not indexBean.readOnlyPermission}"
+											update="panelForm, :formGrowl:growl"></p:commandButton>
+									</p:dialog>
+								</h:form>
+							</div> <!-- end Permission Context -->
+						</td>
+					</tr>
+				</table>
+			</div>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

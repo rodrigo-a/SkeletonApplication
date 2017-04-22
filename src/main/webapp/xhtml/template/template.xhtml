@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Skeleton Project</title>
+
+	<h:outputStylesheet name="minmaxing/css/main.css" />
+
+	<h:outputStylesheet name="css/ajustes.css" />
+	<h:outputStylesheet name="css/locale-primefaces.css" />
+
+</h:head>
+
+<h:body>
+	<h:form id="formGrowl">
+		<p:growl id="growl" showDetail="true"
+			style="z-index: 999999 !important;" globalOnly="true" />
+	</h:form>
+
+	<div id="page-wrapper">
+		<div id="header-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="12u">
+
+						<header id="header">
+						<h1>
+							<a href="#" id="logo">Skeleton Project</a>
+						</h1>
+						<nav id="nav"> <a href="index"
+							class="#{view.viewId.contains('/index') ? 'current-page-item' : ''}">index</a></nav></header>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<ui:insert name="content">
+
+
+
+		</ui:insert>
+
+		<div id="footer-wrapper">
+			<div class="container">
+
+				<div class="row">
+					<div class="12u">
+
+						<div style="text-align: center;"></div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</h:body>
+</html>
