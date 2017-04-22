@@ -12,7 +12,7 @@ Pre-requisites: Maven, Tomcat 7, MySql Server. All of them installed and running
 
 * MySql
 
-Create an schema on Mysql named "test" and execute the init.sql.
+    Create an schema on Mysql named "test" and execute the init.sql.
 
 Download the .zip file from this repository. 
 Extract the project folder.
@@ -29,21 +29,22 @@ To access the rest endpoint:
 
 - List all Users:
 
-http://localhost:8080/SkeletonApp/rest/User/list 
+    http://localhost:8080/SkeletonApp/rest/User/list 
 
 
 - Read User
 
-http://localhost:8080/SkeletonApp/rest/User/read/{ID} 
+    http://localhost:8080/SkeletonApp/rest/User/read/{ID} 
 
 
 - Create User
 
-http://localhost:8080/SkeletonApp/rest/User/create/{NAME}/{DESCRIPTION}
+    http://localhost:8080/SkeletonApp/rest/User/create/{NAME}/{DESCRIPTION}
 
 - Delete User
 
-http://localhost:8080/SkeletonApp/rest/User/delete/{ID}
+    http://localhost:8080/SkeletonApp/rest/User/delete/{ID}
 
 - Update User
-http://localhost:8080/SkeletonApp/rest/User/update/{ID}/{NAME}/{DESCRIPTION}
+
+    http://localhost:8080/SkeletonApp/rest/User/update/{ID}/{NAME}/{DESCRIPTION}
