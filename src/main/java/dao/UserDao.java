@@ -28,4 +28,10 @@ public class UserDao {
 		session.delete(user);
 	}
 
+	public User loadById(Integer id) {
+		Query qry = session.getNamedQuery("User.loadById");
+		qry.setParameter("id", id);
+		return (User)qry.uniqueResult();
+	}
+
 }

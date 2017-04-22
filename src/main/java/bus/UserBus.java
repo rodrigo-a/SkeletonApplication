@@ -70,4 +70,19 @@ public class UserBus {
 		user.getPermissions().remove(perm);
 		save(user);
 	}
+
+	public static User loadById(Integer id) {
+		User rvalue = null;
+		Session sessao = SessionFactoryMysql.getSession();
+		try {
+			sessao.beginTransaction();
+			rvalue = new UserDao(sessao).loadById(id);
+			sessao.getTransaction().commit();
+		} catch (Exception e) {
+			sessao.getTransaction().rollback();
+			e.printStackTrace();
+		}
+
+		return rvalue;
+	}
 }
