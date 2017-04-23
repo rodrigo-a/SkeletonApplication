@@ -1,5 +1,5 @@
 package servlet;
-
+/*
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -21,3 +21,4 @@ public class JMSServlet implements ServletContextListener {
 	}
 
 }
+*/
