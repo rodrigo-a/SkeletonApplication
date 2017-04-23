@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
 
-
 public class Utils {
 
 	public Utils() {
@@ -19,10 +18,9 @@ public class Utils {
 
 	public static HttpSession getSession() {
 		return (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-	}	
-	
-	public static void executeJS(String js)
-	{
+	}
+
+	public static void executeJS(String js) {
 		RequestContext.getCurrentInstance().execute(js);
 	}
 
