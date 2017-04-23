@@ -43,7 +43,7 @@
 	</servlet-mapping>
 	
 	<listener>
-		<listener-class>servlets.JMSServlet</listener-class>
+		<listener-class>servlet.JMSServlet</listener-class>
 	</listener>
 	
 </web-app>
