@@ -42,8 +42,5 @@
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 	
-	<listener>
-		<listener-class>servlet.JMSServlet</listener-class>
-	</listener>
 	
 </web-app>
