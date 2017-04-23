@@ -16,8 +16,8 @@ Pre-requisites: Maven, Tomcat 7, MySql Server. All of them installed and running
 
 Download the .zip file from this repository. 
 Extract the project folder.
-Compile with Maven (mvn compile)
-Package the compiled project (mvn package)
+Compile with Maven (mvn compile).
+Package the compiled project (mvn package).
 Copy the generated .war file (SkeletonApp.war) into the deployment folder of your Tomcat 7 server.
 
 To access the application:
